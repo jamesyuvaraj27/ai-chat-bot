@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { SendHorizontal } from 'lucide-react';
 
 function ChatInput({ onSend, isLoading }) {
   const [value, setValue] = useState('');
@@ -9,7 +10,7 @@ function ChatInput({ onSend, isLoading }) {
     const ta = textareaRef.current;
     if (!ta) return;
     ta.style.height = 'auto';
-    ta.style.height = `${Math.min(ta.scrollHeight, 150)}px`;
+    ta.style.height = `${Math.min(ta.scrollHeight, 160)}px`;
   }, [value]);
 
   const handleSubmit = () => {
@@ -39,7 +40,7 @@ function ChatInput({ onSend, isLoading }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type a message…"
+          placeholder="Ask JADE anything…"
           rows={1}
           disabled={isLoading}
           aria-label="Message input"
@@ -55,10 +56,7 @@ function ChatInput({ onSend, isLoading }) {
           {isLoading ? (
             <div className="btn-send-loader" />
           ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13" />
-              <polygon points="22 2 15 22 11 13 2 9 22 2" />
-            </svg>
+            <SendHorizontal size={20} strokeWidth={1.75} />
           )}
         </button>
       </div>

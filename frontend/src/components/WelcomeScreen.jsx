@@ -1,37 +1,98 @@
+import { motion } from 'framer-motion';
+import { Code, BookOpen, Lightbulb, PenTool, Search, Brain, BarChart3, Zap } from 'lucide-react';
+
 const suggestions = [
-  '👋 Say hello',
-  '💡 Ask me anything',
-  '🚀 Tell me a fun fact',
-  '🎨 What can you do?',
+  { text: 'Write Code', icon: Code },
+  { text: 'Explain a Concept', icon: BookOpen },
+  { text: 'Brainstorm Ideas', icon: Lightbulb },
+  { text: 'Optimize Code', icon: Zap },
+  { text: 'Draft Content', icon: PenTool },
+  { text: 'Analyze Data', icon: BarChart3 },
+  { text: 'Research a Topic', icon: Search },
+  { text: 'Solve a Problem', icon: Brain },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const logoVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const chipVariants = {
+  hidden: { opacity: 0, y: 16, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
 
 function WelcomeScreen({ onSuggestionClick }) {
   return (
-    <div className="welcome">
-      <div className="welcome-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2a9 9 0 0 1 9 9c0 3.88-3.13 7.19-7.5 8.72a1 1 0 0 1-1.29-.57A1 1 0 0 1 12.78 18h.22a7 7 0 1 0-7-7 1 1 0 0 1-2 0A9 9 0 0 1 12 2z" />
-          <circle cx="12" cy="11" r="1" fill="currentColor" />
-          <circle cx="8" cy="11" r="1" fill="currentColor" />
-          <circle cx="16" cy="11" r="1" fill="currentColor" />
-        </svg>
-      </div>
-      <h2 className="welcome-title">Welcome to AI Echo Bot</h2>
-      <p className="welcome-description">
-        Start a conversation by typing a message below. Your messages will be echoed back — a real AI provider can be plugged in anytime.
-      </p>
-      <div className="suggestions">
-        {suggestions.map((text) => (
-          <button
+    <motion.div
+      className="welcome"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div className="welcome-logo" variants={logoVariants}>
+        <img src="/logo.svg" alt="JADE logo" />
+      </motion.div>
+
+      <motion.h2 className="welcome-title" variants={itemVariants}>
+        JADE
+      </motion.h2>
+
+      <motion.p className="welcome-tagline" variants={itemVariants}>
+        Neural Intelligence Platform
+      </motion.p>
+
+      <motion.p className="welcome-description" variants={itemVariants}>
+        Intelligent conversations for coding, learning, research,
+        automation, planning, writing, and everyday problem solving.
+      </motion.p>
+
+      <motion.div className="suggestions" variants={containerVariants}>
+        {suggestions.map(({ text, icon: Icon }) => (
+          <motion.button
             key={text}
             className="suggestion-chip"
-            onClick={() => onSuggestionClick(text.replace(/^[^\s]+\s/, ''))}
+            onClick={() => onSuggestionClick(text)}
+            id={`suggestion-${text.toLowerCase().replace(/\s+/g, '-')}`}
+            variants={chipVariants}
+            whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.97 }}
           >
+            <Icon size={16} strokeWidth={1.75} />
             {text}
-          </button>
+          </motion.button>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import WelcomeScreen from './WelcomeScreen';
@@ -14,14 +15,16 @@ function ChatWindow({ messages, isLoading, onSuggestionClick }) {
   const isEmpty = messages.length === 0 && !isLoading;
 
   return (
-    <main className="chat-window">
+    <main className="chat-window" id="chat-window">
       {isEmpty ? (
         <WelcomeScreen onSuggestionClick={onSuggestionClick} />
       ) : (
         <div className="messages-list">
-          {messages.map((msg) => (
-            <ChatBubble key={msg.id} message={msg} />
-          ))}
+          <AnimatePresence initial={false}>
+            {messages.map((msg) => (
+              <ChatBubble key={msg.id} message={msg} />
+            ))}
+          </AnimatePresence>
           {isLoading && <TypingIndicator />}
           <div ref={bottomRef} />
         </div>

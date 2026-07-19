@@ -1,22 +1,30 @@
+import { motion } from 'framer-motion';
+
 function TypingIndicator() {
   return (
-    <div className="bubble-row bubble-row-ai">
+    <motion.div
+      className="thinking-indicator"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="avatar avatar-ai" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-          <line x1="9" y1="9" x2="9.01" y2="9" />
-          <line x1="15" y1="9" x2="15.01" y2="9" />
-        </svg>
+        <img src="/logo.svg" alt="" />
       </div>
-      <div className="bubble bubble-ai typing-bubble">
-        <div className="typing-dots">
-          <span className="typing-dot" />
-          <span className="typing-dot" />
-          <span className="typing-dot" />
+      <div className="thinking-bubble">
+        <span className="thinking-text">JADE is thinking</span>
+        <div className="thinking-stars" aria-hidden="true">
+          <span className="thinking-star" />
+          <span className="thinking-star" />
+          <span className="thinking-star" />
+        </div>
+        <div className="thinking-dots">
+          <span className="thinking-dot" />
+          <span className="thinking-dot" />
+          <span className="thinking-dot" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
@@ -8,25 +9,46 @@ function App() {
   const { messages, isLoading, error, sendMessage, clearError, clearChat } = useChat();
 
   return (
-    <div className="app">
-      <Header onClearChat={messages.length > 0 ? clearChat : null} />
-
-      <ErrorMessage
-        message={error}
-        onDismiss={clearError}
+    <>
+      {/* Background Video — Fullscreen */}
+      <video
+        className="space-bg-video"
+        src="/videos/space-bg.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
       />
+      <div className="space-bg-overlay" aria-hidden="true" />
+      <div className="space-bg-gradient" aria-hidden="true" />
 
-      <ChatWindow
-        messages={messages}
-        isLoading={isLoading}
-        onSuggestionClick={sendMessage}
-      />
+      {/* Layer 6: Glass Application */}
+      <div className="app">
+        <Header onClearChat={messages.length > 0 ? clearChat : null} />
 
-      <ChatInput
-        onSend={sendMessage}
-        isLoading={isLoading}
-      />
-    </div>
+        <AnimatePresence>
+          {error && (
+            <ErrorMessage
+              message={error}
+              onDismiss={clearError}
+            />
+          )}
+        </AnimatePresence>
+
+        <ChatWindow
+          messages={messages}
+          isLoading={isLoading}
+          onSuggestionClick={sendMessage}
+        />
+
+        <ChatInput
+          onSend={sendMessage}
+          isLoading={isLoading}
+        />
+      </div>
+    </>
   );
 }
 

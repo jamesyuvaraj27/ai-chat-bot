@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="jade-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="jade-inner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Hexagon outer -->
+  <polygon points="60,8 108,32 108,88 60,112 12,88 12,32" fill="url(#jade-grad)" opacity="0.15" stroke="url(#jade-grad)" stroke-width="1.5"/>
+  <!-- Hexagon mid -->
+  <polygon points="60,18 98,38 98,82 60,102 22,82 22,38" fill="url(#jade-grad)" opacity="0.25" stroke="url(#jade-grad)" stroke-width="1"/>
+  <!-- Inner hexagon -->
+  <polygon points="60,28 88,44 88,76 60,92 32,76 32,44" fill="url(#jade-grad)" opacity="0.9" stroke="none"/>
+  <!-- J letterform -->
+  <text x="60" y="75" text-anchor="middle" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="38" font-weight="700" fill="white" filter="url(#glow)">J</text>
+  <!-- Neural dots -->
+  <circle cx="60" cy="8" r="3" fill="#38BDF8" opacity="0.7"/>
+  <circle cx="108" cy="32" r="3" fill="#3B82F6" opacity="0.6"/>
+  <circle cx="108" cy="88" r="3" fill="#2563EB" opacity="0.5"/>
+  <circle cx="60" cy="112" r="3" fill="#38BDF8" opacity="0.7"/>
+  <circle cx="12" cy="88" r="3" fill="#3B82F6" opacity="0.6"/>
+  <circle cx="12" cy="32" r="3" fill="#2563EB" opacity="0.5"/>
+  <!-- Neural connection lines -->
+  <line x1="60" y1="8" x2="108" y2="32" stroke="#38BDF8" stroke-width="0.5" opacity="0.3"/>
+  <line x1="108" y1="32" x2="108" y2="88" stroke="#3B82F6" stroke-width="0.5" opacity="0.3"/>
+  <line x1="12" y1="32" x2="12" y2="88" stroke="#3B82F6" stroke-width="0.5" opacity="0.3"/>
+  <line x1="60" y1="8" x2="12" y2="32" stroke="#2563EB" stroke-width="0.5" opacity="0.3"/>
+</svg>
